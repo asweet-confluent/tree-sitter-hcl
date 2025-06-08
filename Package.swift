@@ -8,7 +8,7 @@ let package = Package(
         .library(name: "TreeSitterHCL", targets: ["TreeSitterHCL"]),
     ],
     dependencies: [
-        .package(name: "SwiftTreeSitter", url: "https://github.com/tree-sitter/swift-tree-sitter", from: "0.9.0"),
+        .package(name: "SwiftTreeSitter", url: "https://github.com/tree-sitter/swift-tree-sitter", from: "0.25.0"),
     ],
     targets: [
         .target(
@@ -20,7 +20,10 @@ let package = Package(
                 "src/scanner.c"
             ],
             publicHeadersPath: "bindings/swift",
-            cSettings: [.headerSearchPath("src")]
+            cSettings: [
+                .define("_DARWIN_C_SOURCE")
+                .headerSearchPath("src")
+            ]
         ),
         .testTarget(
             name: "TreeSitterHCLTests",
@@ -29,6 +32,9 @@ let package = Package(
                 "TreeSitterHCL",
             ],
             path: "bindings/swift/TreeSitterHCLTests"
+            cSettings: [
+                .define("_DARWIN_C_SOURCE")
+            ]
         )
     ],
     cLanguageStandard: .c11
