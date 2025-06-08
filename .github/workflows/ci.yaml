@@ -32,18 +32,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-14]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
-      - name: Regenerate with ABI 14
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Regenerate
         # TODO: remove when node & swift support ABI 15
         run: |-
-          tree-sitter generate --abi=14
+          tree-sitter generate
           cd dialects/terraform
-          tree-sitter generate --abi=14
+          tree-sitter generate
       - name: Run parser and binding tests
         uses: tree-sitter/parser-test-action@v2
         with:
