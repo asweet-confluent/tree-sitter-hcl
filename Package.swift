@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 
 import PackageDescription
 
@@ -21,7 +21,8 @@ let package = Package(
             ],
             publicHeadersPath: "bindings/swift",
             cSettings: [
-                .define("_DARWIN_C_SOURCE")
+                .define("_DARWIN_C_SOURCE"),
+                .define("BYTE_ORDER=1234"),
                 .headerSearchPath("src")
             ]
         ),
@@ -31,9 +32,10 @@ let package = Package(
                 "SwiftTreeSitter",
                 "TreeSitterHCL",
             ],
-            path: "bindings/swift/TreeSitterHCLTests"
+            path: "bindings/swift/TreeSitterHCLTests",
             cSettings: [
-                .define("_DARWIN_C_SOURCE")
+                .define("_DARWIN_C_SOURCE"),
+                .define("BYTE_ORDER=1234")
             ]
         )
     ],
